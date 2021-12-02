@@ -1,3 +1,15 @@
+
+# IF APPLICABLE
+# import tensorflow as tf
+# gpus = tf.config.experimental.list_physical_devices('GPU')
+# if gpus:
+#   try:
+#     tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=4500)])
+#   except RuntimeError as e:
+#     print(e)
+
+
+
 import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
@@ -26,8 +38,8 @@ y_test_categorical = keras.utils.to_categorical(
 def get_model():
     model = keras.Sequential([
             keras.layers.Flatten(input_shape=(32,32,3)),
-            keras.layers.Dense(4500, activation='relu'),
-            keras.layers.Dense(1200, activation='relu'),
+            keras.layers.Dense(3000, activation='relu'),
+            keras.layers.Dense(1000, activation='relu'),
             keras.layers.Dense(10, activation='sigmoid')    
         ])
 
@@ -41,10 +53,9 @@ def get_model():
 with tf.device('/GPU:0'):
     cpu_model = get_model()
     cpu_model.fit(X_train_scaled, y_train_categorical, epochs=10)
-    
+
 
 %timeit -n1 -r1 
 with tf.device('/CPU:0'):
     cpu_model = get_model()
     cpu_model.fit(X_train_scaled, y_train_categorical, epochs=10)
-
