@@ -33,8 +33,8 @@ y_test_categorical = keras.utils.to_categorical(
 def get_model():
     model = keras.Sequential([
             keras.layers.Flatten(input_shape=(32,32,3)),
-            keras.layers.Dense(3000, activation='relu'),
-            keras.layers.Dense(1000, activation='relu'),
+            keras.layers.Dense(4500, activation='relu'),
+            keras.layers.Dense(1200, activation='relu'),
             keras.layers.Dense(10, activation='sigmoid')    
         ])
 
